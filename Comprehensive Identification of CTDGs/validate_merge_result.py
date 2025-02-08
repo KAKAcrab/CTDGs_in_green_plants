@@ -1,6 +1,6 @@
 import sys
 from collections import defaultdict
-##验证是否全部完成合并
+## validate the completence of merging
 
 def read_original_file(file_path):
     clusters = defaultdict(set)
