@@ -25,8 +25,23 @@ python process_numbers_result.py Aty_processed_raw_genes_result Aty_processed_ra
 ```
 **· For each stress condition, caculate the DE-CTDGs according to the Mean Expression Difference and the Percentage of DEGs in Members, finally get the DE-CTDGs matrix for further analysis:**
 ```bash
+## trimming
+java -jar PATH/TO/trimmomatic-0.39.jar PE -threads 10 *.sra.fastq.gz *.sra.fastq.gz -baseout 1.clean_reads/* ILLUMINACLIP:PATH/TO/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 MINLEN:36
+
+## quality control
+fastqc -o . *.sra.fastq.gz
+
+## align
+hisat2 -t  -p 5 -x Aty -1 *.sra_1.fastq.gz -2 *.sra_2.fastq.gz -S *.sam
+samtools view -S *.sam -b > *.bam
+samtools sort -n *.bam -o *_nsorted.bam
+
+## get reads count
+htseq-count -n 10 -t gene -i ID -r name -f bam *_nsorted.bam Aty.gff3 > *.count
+
 ## calculate each conditon one by one and get the DE-CTDGs lists
 python identify_DECTDG.py --gene_file Aty_processed_raw_genes_result --number_file Aty_processed_raw_numbers_result --counts_file cold_counts_matrix.tsv --anno_file cold_pasAnno.csv --output_file cold_DEG_clusters.txt
+
 ## merge the DE-CTDGs lists under all conditions into the final matrix
 python create_expression_matrix.py all_CTDGs_list_of_Aty Aty_processed_raw_numbers_result expression_matrix.csv cold_DEG_clusters.txt drought_DEG_clusters.txt heat_DEG_clusters.txt light_DEG_clusters.txt salt_DEG_clusters.txt
 ```
