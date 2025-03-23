@@ -1,8 +1,10 @@
 # CTDGs_in_green_plants
+
 Comprehensive identification and analysis of clusters of tandemly duplicated genes reveals their contributions to adaptive evolution of green plants
 
 
 **· Extract ctdgFinder results files: combines overlapping cluster results for all species listed in the files under CTDG_out directory and merges clusters with shared bases:**
+
 ```bash
 python extract_result.py list ## get initial extracted results
 
@@ -23,7 +25,32 @@ python overlap_analysis.py Aty
 python process_numbers_result.py Aty_processed_raw_genes_result Aty_processed_raw_numbers_result
 
 ```
+
+**· Clustering rates analysis of different genes across 220 species**
+
+Calculate the distribution matrix of clustering rates of genes of 7 traits in 220 species and obtain the protein sequences of all query
+```bash
+python analyze_plant_genes.py --result_dir ./ --clustered_dir ./ --species_order 220_spe_list_low2high_latin_abbr --gene_info 220_genes_parsed.csv --protein_file 220.pep --output_csv out_put/gene_distribution_stats.csv --output_seq_dir out_put
+```
+
+Select genes with the largest cluster change rate
+
+```bash
+Rscript ../custom_script/cluster_ratio_analyse.R -i ./gene_distribution_stats.csv -o ./cluster_ratio_analysis
+```
+
+Calculate the distribution matrix of clustering rates of different genes in different species and the bubble diagram of the first three traits
+
+```bash
+Rscript ../../custom_script/Bubble_plot_of_cluster_ratio.R -i gene_distribution_stats.csv -g group2spe.csv -n gene_family_name2_gene_ID.csv -o result
+```
+
+
+
+
+
 **· For each stress condition, caculate the DE-CTDGs according to the Mean Expression Difference and the Percentage of DEGs in Members, finally get the DE-CTDGs matrix for further analysis:**
+
 ```bash
 ## trimming
 java -jar PATH/TO/trimmomatic-0.39.jar PE -threads 10 *.sra.fastq.gz *.sra.fastq.gz -baseout 1.clean_reads/* ILLUMINACLIP:PATH/TO/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 MINLEN:36
