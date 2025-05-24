@@ -1,0 +1,5 @@
+condition,test_name,p_value,significance,original_p_value,adjustment_method
+cold,Wilcoxon配对检验,5.820766091346743e-11,***,2.9103830456733717e-11,BH
+dehydration,Wilcoxon配对检验,1.1865431415062734e-32,***,2.9663578537656835e-33,BH
+heat,Wilcoxon配对检验,2.244775499552932e-9,***,1.683581624664699e-9,BH
+high_light,Wilcoxon配对检验,0.015625000000000003,*,0.015625000000000003,BH
