@@ -1,9 +1,8 @@
 #!/usr/bin/env Rscript
 
-# 2OG-FeII_Oxy家族基因分布气泡图绘制脚本
 # 作者: YYH
 # 日期: 2025/05/20
-# 用途: 绘制2OG-FeII_Oxy家族基因在220个植物物种中的分布情况
+# 绘制2OG-FeII_Oxy家族基因在220个植物物种中的分布情况
 
 # 加载所需的R包 / Load required packages
 library(dplyr)
