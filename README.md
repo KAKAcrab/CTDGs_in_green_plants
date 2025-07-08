@@ -1,9 +1,19 @@
 # CTDGs_in_green_plants
 
-Comprehensive identification and analysis of clusters of tandemly duplicated genes reveals their contributions to adaptive evolution of green plants
+Comprehensive identification and analysis of clusters of tandemly duplicated genes (CTDGs) reveals their contributions to adaptive evolution of green plants. Input files for ctdgFinder of 220 plant genomes have been uploaded in figshare (https://figshare.com/s/6efd29034a3de7a10964). Identification result files for these species are also in figshare (https://figshare.com/s/32c645197702f4c81400). 
 
+**For each genome, we prepared three input files for ctdgFinder:**  
+**chromosomes.csv:** species,chromosome,length,bandwidth  
+**genes_parsed.csv:** acc,species,chromosome,start,end,strand  
+**seqs_hmmer.fa:** protein sequence of fasta format  
+
+**Result of CTDGs for each species:**  
+**Merged_CTDGs_genes_result_in_220_genomes.tar.gz** and **Merged_CTDGs_numbers_result_in_220_genomes.tar.gz** contain the final results of CTDGs identification in 220 plant genomes.  
+***_merged_genes_result**: Gene ID, Species code, Chromosome ID, CTDG ID, member order  
+***_merged_numbers_result**: Species code, Chromosome ID, CTDG ID, Member count  
 
 **· Extract ctdgFinder results files: combines overlapping cluster results for all species listed in the files under CTDG_out directory and merges clusters with shared bases:**
+
 
 ```bash
 $ python extract_result.py list ## get initial extracted results
